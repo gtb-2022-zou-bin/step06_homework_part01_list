@@ -7,16 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskRepository {
+
     public TaskRepository() {
     }
 
-    List<String> loadTasks(List<String> lines) {
-        final List<String> tasks = new ArrayList<>();
-        tasks.add("# To be done");
+    List<Task> loadTasks() {
+        final List<String> lines = readLines();
+        final List<Task> tasks = new ArrayList<>();
         for (int i = 0; i < lines.size(); ++i) {
-            final var task = lines.get(i);
-            final var id = i + 1;
-            tasks.add(String.format("%d %s", id, task));
+            tasks.add(TaskFactory.createTask(i + 1, lines.get(i)));
         }
         return tasks;
     }

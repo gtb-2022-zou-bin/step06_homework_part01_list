@@ -1,5 +1,6 @@
 package com.thw.gtb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class App {
@@ -9,7 +10,11 @@ public class App {
     }
 
     public List<String> run() {
-        final List<String> lines = taskRepository.readLines();
-        return taskRepository.loadTasks(lines);
+        final var tasks = taskRepository.loadTasks();
+        final List<String> result = new ArrayList<>();
+        result.addAll(Section.tdb().format(tasks));
+        result.addAll(Section.completed().format(tasks));
+        return result;
     }
+
 }
