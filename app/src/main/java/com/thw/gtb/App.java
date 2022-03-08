@@ -1,20 +1,16 @@
 package com.thw.gtb;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class App {
-    private final TaskRepository taskRepository = new TaskRepository();
+    private final ListCommand listCommand = new ListCommand();
 
     public static void main(String[] args) {
+        new App().run().forEach(System.out::println);
     }
 
     public List<String> run() {
-        final var tasks = taskRepository.loadTasks();
-        final List<String> result = new ArrayList<>();
-        result.addAll(Section.tdb().format(tasks));
-        result.addAll(Section.completed().format(tasks));
-        return result;
+        return listCommand.listCommand();
     }
 
 }

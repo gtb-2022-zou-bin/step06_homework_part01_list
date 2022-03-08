@@ -5,7 +5,7 @@ import java.util.List;
 
 public record Section(String title, boolean flag) {
 
-    public static Section tdb(){
+    public static Section tbd(){
         return new Section(Constant.TO_BE_DONE, Constant.FLAG_TO_BE_DONE);
     }
 
@@ -19,6 +19,9 @@ public record Section(String title, boolean flag) {
         tasks.stream().filter(task -> flag() == task.completed())
                 .map(Task::format)
                 .forEach(result::add);
+        if (result.size() == 1) {
+            result.add("Empty");
+        }
         return result;
     }
 }
